@@ -200,7 +200,7 @@ impl ProcessHandle<QueryLimitedInformation> {
         // https://github.com/giampaolo/psutil/issues/875
         for _i in 0..5 {
             let ret =
-                memoryapi::ReadProcessMemory(*self.handle, src as _, data, len, ptr::null_mut());
+                memoryapi::ReadProcessMemory(*self.handle, src as _, data as *mut _, len, ptr::null_mut());
 
             if ret == 0 {
                 err = Error::last_os_error();
